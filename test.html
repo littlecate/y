@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <style>
+        body,
+        html {
+            margin: 0px;
+            padding: 0px;
+            height: 100%;
+        }
+        
+        canvas {
+            margin: 0px;
+            padding: 0px;
+            display: block;
+        }
+        
+        span {
+            font-size: 9pt;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="section-to-print" id="viewContent" style="margin: 10px 0px; width: 850px; height: 357px; position: relative;">
+    </div>
+    <textarea id="myTextArea" style="width:100%;height:300px;"></textarea>
+</body>
+
+</html>
+<script id="myHtmls" type="text/template">
+    <input tabindex="510" class="text1" id="standards" style="left: 101px; top: 194px; width: 672px; height: 21px; position: absolute;" type="text" readonly="" value="standards" databand="footer" _datatype_="c"><input tabindex="520" class="text1" id="instrustmentnums"
+        style="left: 101px; top: 223px; width: 672px; height: 21px; position: absolute;" type="text" readonly="" value="instrustmentnums" databand="footer" _datatype_="c"><input tabindex="530" class="text1" id="instrustmentnames" style="left: 101px; top: 252px; width: 714px; height: 21px; position: absolute;"
+        type="text" readonly="" value="instrustmentnames" databand="footer" _datatype_="c"><input tabindex="540" class="text1" id="temperature" style="left: 101px; top: 281px; width: 408px; height: 21px; position: absolute;" type="text" value="temperature"
+        databand="footer" _datatype_="c"><input tabindex="550" class="text1" id="humidity" style="left: 587px; top: 281px; width: 186px; height: 21px; position: absolute;" type="text" value="humidity" databand="footer" _datatype_="c"><input tabindex="560"
+        class="text1" id="explain" style="left: 101px; top: 310px; width: 408px; height: 21px; position: absolute;" type="text" value="explain" databand="footer" _datatype_="c"><input tabindex="570" class="text1" id="checkdate" style="left: 587px; top: 310px; width: 228px; height: 21px; position: absolute;"
+        onclick="try{WdatePicker({el:document.getElementById('checkdate'),dateFmt:'yyyy-MM-dd',onpicked:function(){top.$(this,self.document).trigger('propertychange')}})}catch(e){}" type="text" value="checkdate" editstyle="日历" databand="footer" _datatype_="d">
+    <span id="tt_1" style="left: 300px; top: 71px; width: 66px; height: 23px; text-align: center; position: absolute;" databand="header">试件体积<br>(cm<sup style="width: 52px;">3</sup>)</span><span id="tt_2" style="left: 416px; top: 71px; width: 52px; height: 23px; text-align: center; position: absolute;"
+        databand="header">干质量<br>(g)</span><span id="tt_3" style="left: 20px; top: 198px; width: 75px; height: 20px; text-align: center; position: absolute;" databand="footer">方法标准</span><span id="tt_4" style="left: 20px; top: 226px; width: 75px; height: 20px; text-align: center; position: absolute;"
+        databand="footer">设备编号</span><span id="tt_5" style="left: 20px; top: 254px; width: 75px; height: 20px; text-align: center; position: absolute;" databand="footer">设备型号</span><span id="tt_6" style="left: 20px; top: 282px; width: 75px; height: 20px; text-align: center; position: absolute;"
+        databand="footer">温度(℃)</span><span id="tt_7" style="left: 515px; top: 284px; width: 66px; height: 20px; text-align: center; position: absolute;" databand="footer">湿度(%RH)</span><span id="tt_8" style="left: 20px; top: 310px; width: 75px; height: 20px; text-align: center; position: absolute;"
+        databand="footer">备 &nbsp; &nbsp;注</span><span id="tt_9" style="left: 515px; top: 312px; width: 66px; height: 20px; text-align: center; position: absolute;" databand="footer">试验日期</span><span id="t_0" style="left: 358px; top: 71px; width: 52px; height: 23px; text-align: center; position: absolute;"
+        databand="header">天然质量<br>(g)</span><span id="t_1" style="left: 106px; top: 71px; width: 133px; height: 13px; text-align: center; position: absolute;" databand="header">试件尺寸(mm)</span><span id="_baidu_bookmark_start_22" style="line-height: 0px; display: none;">?</span>
+    <span id="t_2" style="left: 748px; top: 71px; width: 66px; height: 23px; text-align: center; position: absolute;" databand="header">含水率<br>(%)</span>
+    <span id="t_3" style="left: 532px; top: 71px; width: 66px; height: 23px; text-align: center; position: absolute;" databand="header">天然密度<br>(g/cm<sup>3</sup>)</span><span id="t_4" style="left: 604px; top: 71px; width: 66px; height: 23px; text-align: center; position: absolute;"
+        databand="header">干密度<br>(g/cm<sup>3</sup>)</span><span id="t_6" style="left: 107px; top: 87px; width: 61px; height: 21px; text-align: center; position: absolute;" databand="header">直径</span><span id="t_7" style="left: 175px; top: 89px; width: 61px; height: 21px; text-align: center; position: absolute;"
+        databand="header">高</span><span id="t_8" style="left: 242px; top: 71px; width: 52px; height: 23px; text-align: center; position: absolute;" databand="header">试件面积<br>(cm<sup>2</sup>)</span><span style="color: rgb(0, 112, 192);"></span><span style="color: rgb(192, 0, 0);"><span style="color: rgb(0, 112, 192);"></span></span>
+    <span id="ttt_1" style="left: 476px; top: 71px; width: 52px; height: 23px; text-align: center; position: absolute;" databand="header">&nbsp;饱和质量<br>(g)</span><input tabindex="30" class="text1" id="cck1" style="left: 107px; top: 110px; width: 61px; height: 21px; text-align: center; position: absolute;"
+        type="text" size="1" value="cck1" databand="detail" _datatype_="n">
+    <input tabindex="40" class="text1" id="ccg1" style="left: 175px; top: 110px; width: 61px; height: 21px; text-align: center; position: absolute;" type="text" size="10" value="ccg1" databand="detail" _datatype_="n"><input class="textreadonly" id="jmj1"
+        style="left: 242px; top: 110px; width: 52px; height: 21px; text-align: center; position: absolute;" type="text" readonly="readonly" value="jmj1" isreadonly="readonly" databand="detail" isnullable="" displayvalue="0.00" presion="2" amendtype="00" _datatype_="n"
+        isautotestitem=""><input class="textreadonly" id="tij1" style="left: 300px; top: 110px; width: 52px; height: 21px; text-align: center; position: absolute;" type="text" readonly="readonly" value="tij1" isreadonly="readonly" databand="detail" isnullable=""
+        displayvalue="0.0" presion="1" amendtype="00" _datatype_="n" isautotestitem=""><input tabindex="50" class="text1" id="yzl1" style="left: 358px; top: 110px; width: 52px; height: 21px; text-align: center; position: absolute;" type="text" value="yzl1"
+        databand="detail" _datatype_="n"><input tabindex="60" class="text1" id="gzl1" style="left: 416px; top: 110px; width: 52px; height: 21px; text-align: center; position: absolute;" type="text" value="gzl1" databand="detail" _datatype_="n"><input class="textreadonly"
+        id="hsl1" style="left: 748px; top: 110px; width: 66px; height: 21px; text-align: center; position: absolute;" type="text" readonly="readonly" value="hsl1" isreadonly="readonly" databand="detail" isnullable="" displayvalue="0.00" presion="2" amendtype="00"
+        _datatype_="n" isautotestitem=""><input class="textreadonly" id="ymd1" style="left: 532px; top: 110px; width: 66px; height: 21px; text-align: center; position: absolute;" type="text" readonly="readonly" value="ymd1" isreadonly="readonly" databand="detail"
+        isnullable="" displayvalue="0.00" presion="2" amendtype="00" _datatype_="n" isautotestitem=""><input class="textreadonly" id="gmd1" style="left: 604px; top: 110px; width: 66px; height: 21px; text-align: center; position: absolute;" type="text" readonly="readonly"
+        value="gmd1" isreadonly="readonly" databand="detail" isnullable="" displayvalue="0.00" presion="2" amendtype="00" _datatype_="n" isautotestitem=""><strong><span id="t_9" style="left: 355px; top: 32px; width: 142px; height: 12px; text-align: center; position: absolute;" databand="header">&nbsp;块体密度、含水率试验</span><br></strong>
+    <span id="t_4" style="left: 675px; top: 72px; width: 66px; height: 23px; text-align: center; position: absolute;" databand="header">饱和密度<br>(g/cm<sup>3</sup>)</span><input class="text1" id="bhzl1" style="left: 474px; top: 110px; width: 52px; height: 21px; text-align: center; position: absolute;"
+        type="text" value="bhzl1" databand="detail" _datatype_="n"><input class="textreadonly" id="bhmd1" style="left: 676px; top: 110px; width: 66px; height: 21px; text-align: center; position: absolute;" type="text" readonly="readonly" value="bhmd1" isreadonly="readonly"
+        databand="detail" displayvalue="0.00" presion="2" amendtype="00" _datatype_="n"><span id="t_5" style="left: 35px; top: 77px; width: 66px; height: 12px; text-align: center; position: absolute;" databand="header">试件编号</span>
+    <input class="text1" id="sybh" style="left: 35px; top: 110px; width: 66px; height: 21px; text-align: center; position: absolute;" type="text" size="1" value="sybh" databand="detail" _datatype_="c"><input class="button1" id="button_Select1" style="left: 781px; top: 223px; width: 40px; position: absolute;"
+        onclick="openInstrumentsSelectDialog()" type="button" value="选择" databand="footer"><input class="button1" id="button_Select2" style="left: 781px; top: 281px; width: 40px; position: absolute;" onclick="openHumiditySelectDialog()" type="button" value="选择"
+        databand="footer"><input class="button1" id="button_SelectTestStandrads" style="left: 781px; top: 194px; width: 40px; position: absolute;" onclick="openTestStandradsSelectDialog()" type="button" value="选择" databand="footer"><input tabindex="190" class="text1"
+        id="cck1_rowrow_2" style="left: 107px; top: 136px; width: 61px; height: 21px; text-align: center; position: absolute;" type="text" size="1" databand="detail" _datatype_="n"><input tabindex="200" class="text1" id="ccg1_rowrow_2" style="left: 175px; top: 136px; width: 61px; height: 21px; text-align: center; position: absolute;"
+        type="text" size="10" databand="detail" _datatype_="n"><input class="textreadonly" id="jmj1_rowrow_2" style="left: 242px; top: 136px; width: 52px; height: 21px; text-align: center; position: absolute;" type="text" readonly="readonly" isreadonly="readonly"
+        databand="detail" isnullable="" displayvalue="0.00" presion="2" amendtype="00" _datatype_="n" isautotestitem=""><input class="textreadonly" id="tij1_rowrow_2" style="left: 300px; top: 136px; width: 52px; height: 21px; text-align: center; position: absolute;"
+        type="text" readonly="readonly" isreadonly="readonly" databand="detail" isnullable="" displayvalue="0.0" presion="1" amendtype="00" _datatype_="n" isautotestitem=""><input tabindex="210" class="text1" id="yzl1_rowrow_2" style="left: 358px; top: 136px; width: 52px; height: 21px; text-align: center; position: absolute;"
+        type="text" databand="detail" _datatype_="n"><input tabindex="220" class="text1" id="gzl1_rowrow_2" style="left: 416px; top: 136px; width: 52px; height: 21px; text-align: center; position: absolute;" type="text" databand="detail" _datatype_="n">
+    <input class="textreadonly" id="hsl1_rowrow_2" style="left: 748px; top: 136px; width: 66px; height: 21px; text-align: center; position: absolute;" type="text" readonly="readonly" isreadonly="readonly" databand="detail" isnullable="" displayvalue="0.00"
+        presion="2" amendtype="00" _datatype_="n" isautotestitem=""><input class="textreadonly" id="ymd1_rowrow_2" style="left: 532px; top: 136px; width: 66px; height: 21px; text-align: center; position: absolute;" type="text" readonly="readonly" isreadonly="readonly"
+        databand="detail" isnullable="" displayvalue="0.00" presion="2" amendtype="00" _datatype_="n" isautotestitem=""><input class="textreadonly" id="gmd1_rowrow_2" style="left: 604px; top: 136px; width: 66px; height: 21px; text-align: center; position: absolute;"
+        type="text" readonly="readonly" isreadonly="readonly" databand="detail" isnullable="" displayvalue="0.00" presion="2" amendtype="00" _datatype_="n" isautotestitem=""><input class="text1" id="bhzl1_rowrow_2" style="left: 474px; top: 136px; width: 52px; height: 21px; text-align: center; position: absolute;"
+        type="text" databand="detail" _datatype_="n"><input class="textreadonly" id="bhmd1_rowrow_2" style="left: 676px; top: 136px; width: 66px; height: 21px; text-align: center; position: absolute;" type="text" readonly="readonly" isreadonly="readonly"
+        databand="detail" displayvalue="0.00" presion="2" amendtype="00" _datatype_="n"><input class="text1" id="sybh_rowrow_2" style="left: 35px; top: 136px; width: 66px; height: 21px; text-align: center; position: absolute;" type="text" size="1" databand="detail"
+        _datatype_="c"><input tabindex="270" class="text1" id="cck1_rowrow_3" style="left: 107px; top: 162px; width: 61px; height: 21px; text-align: center; position: absolute;" type="text" size="1" databand="detail" _datatype_="n"><input tabindex="280" class="text1"
+        id="ccg1_rowrow_3" style="left: 175px; top: 162px; width: 61px; height: 21px; text-align: center; position: absolute;" type="text" size="10" databand="detail" _datatype_="n">
+    <input class="textreadonly" id="jmj1_rowrow_3" style="left: 242px; top: 162px; width: 52px; height: 21px; text-align: center; position: absolute;" type="text" readonly="readonly" isreadonly="readonly" databand="detail" isnullable="" displayvalue="0.00"
+        presion="2" amendtype="00" _datatype_="n" isautotestitem=""><input class="textreadonly" id="tij1_rowrow_3" style="left: 300px; top: 162px; width: 52px; height: 21px; text-align: center; position: absolute;" type="text" readonly="readonly" isreadonly="readonly"
+        databand="detail" isnullable="" displayvalue="0.0" presion="1" amendtype="00" _datatype_="n" isautotestitem=""><input tabindex="290" class="text1" id="yzl1_rowrow_3" style="left: 358px; top: 162px; width: 52px; height: 21px; text-align: center; position: absolute;"
+        type="text" databand="detail" _datatype_="n"><input tabindex="300" class="text1" id="gzl1_rowrow_3" style="left: 416px; top: 162px; width: 52px; height: 21px; text-align: center; position: absolute;" type="text" databand="detail" _datatype_="n">
+    <input class="textreadonly" id="hsl1_rowrow_3" style="left: 748px; top: 162px; width: 66px; height: 21px; text-align: center; position: absolute;" type="text" readonly="readonly" isreadonly="readonly" databand="detail" isnullable="" displayvalue="0.00"
+        presion="2" amendtype="00" _datatype_="n" isautotestitem=""><input class="textreadonly" id="ymd1_rowrow_3" style="left: 532px; top: 162px; width: 66px; height: 21px; text-align: center; position: absolute;" type="text" readonly="readonly" isreadonly="readonly"
+        databand="detail" isnullable="" displayvalue="0.00" presion="2" amendtype="00" _datatype_="n" isautotestitem=""><input class="textreadonly" id="gmd1_rowrow_3" style="left: 604px; top: 162px; width: 66px; height: 21px; text-align: center; position: absolute;"
+        type="text" readonly="readonly" isreadonly="readonly" databand="detail" isnullable="" displayvalue="0.00" presion="2" amendtype="00" _datatype_="n" isautotestitem=""><input class="text1" id="bhzl1_rowrow_3" style="left: 474px; top: 162px; width: 52px; height: 21px; text-align: center; position: absolute;"
+        type="text" databand="detail" _datatype_="n"><input class="textreadonly" id="bhmd1_rowrow_3" style="left: 676px; top: 162px; width: 66px; height: 21px; text-align: center; position: absolute;" type="text" readonly="readonly" isreadonly="readonly"
+        databand="detail" displayvalue="0.00" presion="2" amendtype="00" _datatype_="n"><input class="text1" id="sybh_rowrow_3" style="left: 35px; top: 162px; width: 66px; height: 21px; text-align: center; position: absolute;" type="text" size="1" databand="detail"
+        _datatype_="c">
+</script>
+<script>
+    var div = document.getElementById("viewContent");
+    div.innerHTML = document.getElementById("myHtmls").innerHTML;
+    var spans = getSpans(div);
+    var inputs = getInputs(div);
+    var objsAr = spans.concat(inputs);
+    var s = "var ar=" + JSON.stringify(objsAr) + ";";
+    document.getElementById("myTextArea").value = s;
+
+    function getNumberValue(t) {
+        return parseFloat(t.replace("px", ""));
+    }
+
+    function getText(s) {
+        s = s.replace(/<br ?\/?>/gi, "\r\n");
+        s = s.replace(/&nbsp;/gi, " ");
+        s = s.replace(/<sup ?.*?>/gi, "&Sup");
+        s = s.replace(/<\/sup>/gi, "&End");
+        s = s.replace(/<sub ?.*?>/gi, "&Sub");
+        s = s.replace(/<\/sub>/gi, "&End");
+        return s;
+    }
+
+    function getInputs(div) {
+        var inputs = div.getElementsByTagName("input");
+        var objsAr = [];
+        for (var i = 0; i < inputs.length; i++) {
+            var t = inputs[i];
+            var t1 = window.getComputedStyle(t);
+            objsAr.push({
+                type: t.type,
+                id: t.getAttribute("id"),
+                left: getNumberValue(t1.left),
+                top: getNumberValue(t1.top),
+                width: getNumberValue(t1.width),
+                height: getNumberValue(t1.height),
+                borderColor: "#CCD",
+                tabindex: t1.tabindex,
+                valign: t1.verticalAlign || "middle",
+                halign: t1.textAlign || "center",
+                value: t.value,
+                font: {
+                    fontStyle: t1.fontStyle,
+                    fontWeight: t1.fontWeight,
+                    fontSize: getNumberValue(t1.fontSize),
+                    fontFamily: t1.fontFamily
+                }
+            });
+        }
+        return objsAr;
+    }
+
+    function getSpans(div) {
+        var spans = div.getElementsByTagName("SPAN");
+        var objsAr = [];
+        for (var i = 0; i < spans.length; i++) {
+            var t = spans[i];
+            var t1 = window.getComputedStyle(t);
+            objsAr.push({
+                type: "span",
+                id: t.getAttribute("id"),
+                left: getNumberValue(t1.left),
+                top: getNumberValue(t1.top),
+                width: getNumberValue(t1.width),
+                height: getNumberValue(t1.height),
+
+                borderLeftWidth: getNumberValue(t1.borderLeftWidth),
+                borderLeftColor: t1.borderLeftColor,
+                borderLeftStyle: t1.borderLeftStyle,
+
+                borderTopWidth: getNumberValue(t1.borderTopWidth),
+                borderTopColor: t1.borderTopColor,
+                borderTopStyle: t1.borderTopStyle,
+
+                borderRightWidth: getNumberValue(t1.borderRightWidth),
+                borderRightColor: t1.borderRightColor,
+                borderRightStyle: t1.borderRighttStyle,
+
+                borderBottomWidth: getNumberValue(t1.borderBottomWidth),
+                borderBottomColor: t1.borderBottmColor,
+                borderBottomStyle: t1.borderBottomStyle,
+
+                text: getText(t.innerHTML),
+                valign: t1.verticalAlign || "middle",
+                halign: t1.textAlign || "center",
+                font: {
+                    fontStyle: t1.fontStyle,
+                    fontWeight: t1.fontWeight,
+                    fontSize: getNumberValue(t1.fontSize),
+                    fontFamily: t1.fontFamily
+                }
+            });
+        }
+        return objsAr;
+    }
+</script>
