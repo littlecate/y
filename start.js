@@ -196,6 +196,11 @@
         stage.add(o);
     }
 
+    App_process.drawScrollHandle = function(o, events) {
+        var o = new MyScrollBarButton(o, events);
+        stage.add(o);
+    }
+
     var myAppfunctions = window["MyApplication"] = window["MyApplication"] || [],
         b = myAppfunctions.push.bind(myAppfunctions);
     myAppfunctions.push = pushModule, myAppfunctions = myAppfunctions.slice();

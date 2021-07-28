@@ -5,6 +5,7 @@
             var queryFields = t("MyDataList_getQueryFields");
             var data = t("MyDataList_getData");
             var o = {
+                id: "myDataList1",
                 x: 10,
                 y: 10,
                 width: 600,

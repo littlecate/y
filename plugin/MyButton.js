@@ -43,7 +43,7 @@ MyButton.prototype = {
     },
     drawValue: function(ctx) {
         if (this.preImageData != null) {
-            this.restorePreImageData(ctx);
+            this.restorePreImageDataSquare(ctx);
         } else {
             this.storePreImageDataSquare(ctx);
         }

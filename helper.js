@@ -107,6 +107,25 @@ Stage.prototype = {
             this.models[i].draw(this.canvas);
         }
     },
+    redrawOneThing: function(id) {
+        for (var i = 0; i < this.thing.length; i++) {
+            if (this.thing[i].id == id) {
+                this.thing[i].draw(this.canvas);
+                break;
+            }
+        }
+    },
+    redrawOneThing2: function(thing) {
+        thing.draw(this.canvas);
+    },
+    getThingById: function(id) {
+        for (var i = 0; i < this.thing.length; i++) {
+            if (this.thing[i].id == id) {
+                return this.thing[i];
+            }
+        }
+        return null;
+    },
     //绑定事件及派发事件
     BuildEvent: function() {
         var stage = this;
@@ -345,10 +364,20 @@ Thing.prototype = {
     draw: extend.AbstractMethod,
     isScope: extend.AbstractMethod,
     storePreImageDataSquare: function(ctx) {
-        this.preImageData = ctx.getImageData(this.x, this.y, this.width, this.height);
+        this.preImageData = {};
+        this.preImageData.data = ctx.getImageData(this.x, this.y, this.width, this.height);
+        this.preImageData.x = this.x;
+        this.preImageData.y = this.y;
     },
-    restorePreImageData: function(ctx) {
-        ctx.putImageData(this.preImageData, this.x, this.y);
+    restorePreImageDataSquare: function(ctx) {
+        if (this.preImageData != null)
+            ctx.putImageData(this.preImageData.data, this.preImageData.x, this.preImageData.y);
+    },
+    storePreImageDataSquare2: function(ctx, rect) {
+        this.preImageData = {};
+        this.preImageData.data = ctx.getImageData(rect.x, rect.y, rect.width, rect.height);
+        this.preImageData.x = rect.x;
+        this.preImageData.y = rect.y;
     },
     addEvent: function(type, EventHander) {
         type = type.toLowerCase();
