@@ -48,12 +48,16 @@ MyVScrollBarButton.prototype = {
         this.addEvent('mousemove', function(event, pos) {
             if (this._isMouseDown) {
                 this.y = pos.y - this._downY;
-                this.stage.redrawOneThing(this.id);
-                var scrollHeight = this.y - this.sy;
-                var parentThing = this.stage.getThingById(this.parentThingId);
-                parentThing.bodyScrollHeight = scrollHeight;
-                parentThing.isScrollDraw = true;
-                this.stage.redrawOneThing2(parentThing);
+                var me = this;
+                clearTimeout(me.myRedrawTimeout); //用clearTimeout，setTimeout来防止操作卡顿
+                me.myRedrawTimeout = setTimeout(function() {
+                    me.stage.redrawOneThing(me.id);
+                    var scrollHeight = me.y - me.sy;
+                    var parentThing = me.stage.getThingById(me.parentThingId);
+                    parentThing.bodyScrollHeight = scrollHeight;
+                    parentThing.isScrollDraw = true;
+                    me.stage.redrawOneThing2(parentThing);
+                }, 10);
             }
         });
     }

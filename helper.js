@@ -358,6 +358,7 @@ function Thing(x, y) {
     this.onMouseUpList = [];
     this.onKeyUpList = [];
     this.preImageData = null;
+    this.myRedrawTimeout = 0;
 }
 Thing.prototype = {
     //抽象方法
