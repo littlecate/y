@@ -7,6 +7,7 @@ function MyDataList(o, events) {
     this.isScrollDraw = false;
     this.queryFields = o.queryFields;
     this.data = o.data;
+    this.bodyTotalHeight = null;
     this.font = Utils.getDefaultFont();
     this._isReadyToDraw = true;
     this._isDrawed = false;
@@ -28,6 +29,9 @@ MyDataList.prototype = {
         var y = this.y;
         this.restorePreImageDataSquare(ctx);
         var bodyRect = { x: x - 1, y: y + 45, width: ctx.canvas.width - 20 - 20 - 1, height: ctx.canvas.height - 45 * 2 - 10 };
+        if (this.bodyTotalHeight == null) {
+            this.bodyTotalHeight = this.data["records"].length * 40;
+        }
         this.storePreImageDataSquare2(ctx, bodyRect);
         if (!this.isScrollDraw) {
             var rect = { x: x, y: y, width: lableWidth, height: 40, X: x, Y: y, Width: lableWidth, Height: 40 };
@@ -37,33 +41,55 @@ MyDataList.prototype = {
             ctx.rect(rect.x, rect.y, rect.width, rect.height);
             ctx.stroke();
         }
+        var y2 = y + 5;
         y -= this.bodyScrollHeight;
         var y1 = y + 45;
         var n = ctx.canvas.height - 45;
-        ctx.save();
+        ctx.beginPath();
         ctx.rect(bodyRect.x, bodyRect.y, bodyRect.width, bodyRect.height);
+        ctx.save();
         ctx.clip();
         var index = 0;
         while (true) {
             if (y1 > n) {
                 break;
             }
-            rect = { x: x, y: y1, width: lableWidth, height: 40, X: x, Y: y, Width: lableWidth, Height: 40 };
-            ctx.beginPath();
-            ctx.lineWidth = "1";
-            ctx.strokeStyle = "red";
-            ctx.rect(rect.x, rect.y, rect.width, rect.height);
-            ctx.stroke();
-            this.font = Utils.getDefaultFont();
             index++;
-            myDrawText.draw(ctx, index + "", this.font, "center", "middle", adjustRect(rect));
+            x = this.x;
+            if (y1 > y2) {
+                rect = { x: x, y: y1, width: lableWidth, height: 40, X: x, Y: y, Width: lableWidth, Height: 40 };
+                ctx.beginPath();
+                ctx.lineWidth = "1";
+                ctx.strokeStyle = "red";
+                ctx.rect(rect.x, rect.y, rect.width, rect.height);
+                ctx.stroke();
+                this.font = Utils.getDefaultFont();
+                myDrawText.draw(ctx, index + "", this.font, "center", "middle", adjustRect(rect));
+                x = this.x + lableWidth;
+                for (var i = 0; i < this.queryFields.length; i++) {
+                    var k = index - 1;
+                    if (k > this.data["records"].length - 1) {
+                        break;
+                    }
+                    var o = this.queryFields[i];
+                    rect = { x: x, y: y1, width: o.titlewidth, height: 40, X: x, Y: y1, Width: o.titlewidth, Height: 40 };
+                    ctx.beginPath();
+                    ctx.lineWidth = "1";
+                    ctx.strokeStyle = "red";
+                    ctx.rect(rect.x, rect.y, rect.width, rect.height);
+                    ctx.stroke();
+                    this.font = Utils.getDefaultFont();
+                    myDrawText.draw(ctx, this.data["records"][k][o.columnname], this.font, "center", "middle", adjustRect(rect));
+                    x += o.titlewidth;
+                }
+            }
             y1 += 40;
         }
         ctx.restore();
-        x += lableWidth;
-        for (var i = 0; i < this.queryFields.length; i++) {
-            var o = this.queryFields[i];
-            if (!this.isScrollDraw) {
+        if (!this.isScrollDraw) {
+            x = this.x + lableWidth;
+            for (var i = 0; i < this.queryFields.length; i++) {
+                var o = this.queryFields[i];
                 var rect = { x: x, y: y, width: o.titlewidth, height: 40, X: x, Y: y, Width: o.titlewidth, Height: 40 };
                 ctx.beginPath();
                 ctx.lineWidth = "1";
@@ -72,24 +98,8 @@ MyDataList.prototype = {
                 ctx.stroke();
                 this.font = Utils.getDefaultFont();
                 myDrawText.draw(ctx, o.columnchname, this.font, "center", "middle", adjustRect(rect));
+                x += o.titlewidth;
             }
-            y1 = y + 45;
-            ctx.save();
-            ctx.rect(bodyRect.x, bodyRect.y, bodyRect.width, bodyRect.height);
-            ctx.clip();
-            for (var k = 0; k < this.data["records"].length; k++) {
-                rect = { x: x, y: y1, width: o.titlewidth, height: 40, X: x, Y: y1, Width: o.titlewidth, Height: 40 };
-                ctx.beginPath();
-                ctx.lineWidth = "1";
-                ctx.strokeStyle = "red";
-                ctx.rect(rect.x, rect.y, rect.width, rect.height);
-                ctx.stroke();
-                this.font = Utils.getDefaultFont();
-                myDrawText.draw(ctx, this.data["records"][k][o.columnname], this.font, "center", "middle", adjustRect(rect));
-                y1 += 40;
-            }
-            ctx.restore();
-            x += o.titlewidth;
         }
         ctx.save();
         if (!this.isScrollDraw) {
@@ -138,7 +148,7 @@ MyDataList.prototype = {
                 width: width,
                 height: width,
                 parentThingId: this.id,
-                scrollbarHeight: height
+                scrollbarHeight: height - 20
             });
             this.stage.add(o);
         }

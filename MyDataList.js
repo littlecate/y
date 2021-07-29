@@ -4,6 +4,14 @@
             //t("MyDataList_drawBackGroundImage");
             var queryFields = t("MyDataList_getQueryFields");
             var data = t("MyDataList_getData");
+            var ar = data["records"];
+            var ar2 = [];
+            for (var i = 0; i < 1000; i++) {
+                for (var k = 0; k < ar.length; k++) {
+                    ar2.push(ar[k]);
+                }
+            }
+            data["records"] = ar2;
             var o = {
                 id: "myDataList1",
                 x: 10,

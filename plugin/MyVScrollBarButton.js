@@ -4,8 +4,9 @@ function MyVScrollBarButton(o) {
     this.id = this.parentThingId + "_vscrollbar";
     this.width = o.width;
     this.height = o.height;
-    this.sy = this.y;
     this.scrollbarHeight = o.scrollbarHeight;
+    this.minY = this.y;
+    this.maxY = this.y + this.scrollbarHeight;
     this._isReadyToDraw = true;
     this._isDrawed = false;
     this._isMouseDown = false;
@@ -48,13 +49,20 @@ MyVScrollBarButton.prototype = {
         this.addEvent('mousemove', function(event, pos) {
             if (this._isMouseDown) {
                 this.y = pos.y - this._downY;
+                if (this.y < this.minY) {
+                    this.y = this.minY
+                }
+                if (this.y > this.maxY) {
+                    this.y = this.maxY
+                }
                 var me = this;
                 clearTimeout(me.myRedrawTimeout); //用clearTimeout，setTimeout来防止操作卡顿
                 me.myRedrawTimeout = setTimeout(function() {
                     me.stage.redrawOneThing(me.id);
-                    var scrollHeight = me.y - me.sy;
+                    var detaY = me.y - me.minY;
                     var parentThing = me.stage.getThingById(me.parentThingId);
-                    parentThing.bodyScrollHeight = scrollHeight;
+                    var rate = detaY / me.scrollbarHeight;
+                    parentThing.bodyScrollHeight = parentThing.bodyTotalHeight * rate;
                     parentThing.isScrollDraw = true;
                     me.stage.redrawOneThing2(parentThing);
                 }, 10);
