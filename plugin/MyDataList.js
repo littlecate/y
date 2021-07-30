@@ -1,8 +1,6 @@
 function MyDataList(o, events) {
     this.$supClass(o.x, o.y);
     this.id = o.id;
-    this.width = o.width;
-    this.height = o.height;
     this.bodyScrollHeight = 0;
     this.isScrollDraw = false;
     this.queryFields = o.queryFields;
@@ -15,8 +13,7 @@ function MyDataList(o, events) {
     for (var i = 0; i < this.queryFields.length; i++) {
         this.queryFields[i].titlewidth = getNumberValue(this.queryFields[i].titlewidth);
     }
-    if (events)
-        this.buildEvent(events);
+    this.buildEvent(events);
 }
 MyDataList.prototype = {
     draw: function(ctx) {
@@ -27,6 +24,8 @@ MyDataList.prototype = {
         var lableWidth = 40;
         var x = this.x;
         var y = this.y;
+        this.width = ctx.canvas.width - 20;
+        this.height = ctx.canvas.height - 20;
         this.restorePreImageDataSquare(ctx);
         var bodyRect = { x: x - 1, y: y + 45, width: ctx.canvas.width - 20 - 20 - 1, height: ctx.canvas.height - 45 * 2 - 10 };
         if (this.bodyTotalHeight == null) {
@@ -169,8 +168,10 @@ MyDataList.prototype = {
         return true;
     },
     buildEvent: function(events) {
-        for (var p in events) {
-            this.addEvent(p, events[p]);
+        if (events) {
+            for (var p in events) {
+                this.addEvent(p, events[p]);
+            }
         }
     }
 };

@@ -216,6 +216,22 @@ Stage.prototype = {
                 }
             }
         }, false);
+        var scrollFunc = function(event) {
+            var pos = stage.getMousePosition(event.clientX, event.clientY);
+            var thing = stage.thing;
+            for (var i = thing.length - 1; i >= 0; i--) {
+                if (thing[i].isScope(pos.x, pos.y) && 'onMouseWheel' in thing[i]) {
+                    thing[i].onMouseWheel(event, pos);
+                    event.preventDefault();
+                    event.stopPropagation();
+                    break;
+                }
+            }
+        };
+        if (document.addEventListener) {
+            document.addEventListener('DOMMouseScroll', scrollFunc, false);
+        }
+        window.onmousewheel = document.onmousewheel = scrollFunc;
     },
     addEvent: function(type, handler) {
         switch (type) {
@@ -357,6 +373,7 @@ function Thing(x, y) {
     this.onMouseDownList = [];
     this.onMouseUpList = [];
     this.onKeyUpList = [];
+    this.onMouseWheelList = [];
     this.preImageData = null;
     this.myRedrawTimeout = 0;
 }
@@ -404,6 +421,9 @@ Thing.prototype = {
             case 'keyup':
                 this.onKeyUpList.push(EventHander);
                 break;
+            case 'onmousewheel':
+                this.onMouseWheelList.push(EventHander);
+                break;
         }
     },
     onClick: function(event, pos) {
@@ -442,6 +462,11 @@ Thing.prototype = {
     onKeyUp: function(event, pos) {
         for (var i = 0, len = this.onKeyUpList.length; i < len; i++) {
             this.onKeyUpList[i].call(this, event, pos);
+        }
+    },
+    onMouseWheel: function(event, pos) {
+        for (var i = 0, len = this.onMouseWheelList.length; i < len; i++) {
+            this.onMouseWheelList[i].call(this, event, pos);
         }
     },
     setMouseState: function(isIn, pos) {
