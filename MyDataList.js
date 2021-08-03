@@ -16,8 +16,8 @@
                 id: "myDataList1",
                 x: 10,
                 y: 10,
-                width: 600,
-                height: 400,
+                width: 800,
+                height: 600,
                 queryFields: queryFields,
                 data: data
             };
