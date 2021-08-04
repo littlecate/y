@@ -69,7 +69,8 @@ MyHScrollBarButton.prototype = {
                     var rate = me.scrollWidth / me.scrollbarWidth;
                     var o = me.parentThing;
                     o.bodyScrollWidth = o.bodyTotalWidth * rate;
-                    o.isScrollDraw = true;
+                    o.isHScrollDraw = true;
+                    o.isVScrollDraw = false;
                     me.stage.redrawOneThing2(o);
                 }, 10);
             }

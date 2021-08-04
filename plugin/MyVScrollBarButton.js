@@ -57,7 +57,7 @@ MyVScrollBarButton.prototype = {
             me.myRedrawTimeout = setTimeout(function() {
                 var rate = me1.scrollHeight / me1.scrollbarHeight;
                 me.bodyScrollHeight = me.bodyTotalHeight * rate;
-                me.isScrollDraw = true;
+                me.isScrollDraw1 = true;
                 me.stage.redrawOneThing2(me);
                 me1.stage.redrawOneThing2(me1);
             }, 10);
@@ -104,7 +104,8 @@ MyVScrollBarButton.prototype = {
                     var rate = me.scrollHeight / me.scrollbarHeight;
                     var o = me.parentThing;
                     o.bodyScrollHeight = o.bodyTotalHeight * rate;
-                    o.isScrollDraw = true;
+                    o.isVScrollDraw = true;
+                    o.isHScrollDraw = false;
                     me.stage.redrawOneThing2(o);
                 }, 10);
             }

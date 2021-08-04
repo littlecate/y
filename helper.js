@@ -375,6 +375,7 @@ function Thing(x, y) {
     this.onKeyUpList = [];
     this.onMouseWheelList = [];
     this.preImageData = null;
+    this.preImageDataObj = {};
     this.myRedrawTimeout = 0;
 }
 Thing.prototype = {
@@ -396,6 +397,19 @@ Thing.prototype = {
         this.preImageData.data = ctx.getImageData(rect.x, rect.y, rect.width, rect.height);
         this.preImageData.x = rect.x;
         this.preImageData.y = rect.y;
+    },
+    storePreImageDataSquare3: function(ctx, rect) {
+        var id = rect.x + "_" + rect.y + "_" + rect.width + "_" + rect.height;
+        var o = this.preImageDataObj[id] = {};
+        o.data = ctx.getImageData(rect.x, rect.y, rect.width, rect.height);
+        o.x = rect.x;
+        o.y = rect.y;
+    },
+    restorePreImageDataSquare3: function(ctx, rect) {
+        var id = rect.x + "_" + rect.y + "_" + rect.width + "_" + rect.height;
+        var o = this.preImageDataObj[id];
+        if (o)
+            ctx.putImageData(o.data, o.x, o.y);
     },
     addEvent: function(type, EventHander) {
         type = type.toLowerCase();
