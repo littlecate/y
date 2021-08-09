@@ -57,6 +57,13 @@ function adjustRect(rect) {
     return { x: x, y: y, width: width, height: height, X: x, Y: y, Width: width, Height: height };
 }
 
+function drawRect(ctx, rect, color) {
+    ctx.beginPath();
+    ctx.lineWidth = "1";
+    ctx.strokeStyle = color;
+    ctx.rect(rect.x, rect.y, rect.width, rect.height);
+    ctx.stroke();
+}
 
 var Utils = {
     getMeasureTextSpan: function() {
